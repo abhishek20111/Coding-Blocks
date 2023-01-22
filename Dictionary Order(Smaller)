@@ -1,0 +1,55 @@
+Take as input str, a string. Write a recursive function which returns all the words possible by rearranging the characters of this string which are in dictionary order smaller than the given string. The output strings must be lexicographically sorted.
+
+Input Format
+Single line input containing a string
+
+Constraints
+Length of string <= 10
+
+All characters are unique
+
+Output Format
+Display all the words which are in dictionary order smaller than the string entered in a new line each. The output strings must be sorted.
+
+Sample Input
+cab
+Sample Output
+abc
+acb
+bac
+bca
+Explanation
+The possible permutations of string "cab" are "abc" , "acb" ,"bac" , "bca" , "cab" and "cba" . Only four of them are lexicographically less than "cab". We print them in lexicographical order.
+
+
+
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        char tempArray[] = str.toCharArray();
+        Arrays.sort(tempArray);
+        String str2 = new String(tempArray);
+        solve(str2, "", str);
+
+    }
+    private static void solve(String in, String out, String str2){
+        // if(out < str2){
+        //      System.out.println("out");
+        // }
+
+        if(in.length() == 0){
+            if(str2.compareTo(out)>0){
+                System.out.println(out);
+            }
+            return;
+        }
+
+        for(int i=0; i<in.length(); i++){
+            char ch = in.charAt(i);
+            String newStr = in.substring(0,i) + in.substring(i+1);
+            solve(newStr, out+ch, str2);
+        }
+    }
+}
