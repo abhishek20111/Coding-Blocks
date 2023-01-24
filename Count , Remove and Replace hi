@@ -1,0 +1,32 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int x = count(str);
+        System.out.println(x);
+        solve(str, "", "");
+    }
+    private static int count(String str) {
+        if (str.length() < 2) {
+            return 0;
+        }
+        if (str.substring(0, 2).equals("hi")) {
+            return 1 + count(str.substring(2));
+        } else {
+            return count(str.substring(1));
+        }
+    }
+
+    private static void solve(String in, String out, String out1){
+        if(in.length() == 0){
+            System.out.println(out);
+            System.out.println(out1);
+            return;
+        }
+
+        char ch = in.charAt(0);
+        if(in.length()>1 && ch=='h' && in.charAt(1)=='i') solve(in.substring(2), out, out1+"bye");
+        else solve(in.substring(1), out+ch, out1+ch);
+    }
+}
